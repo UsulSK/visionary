@@ -2,8 +2,6 @@
 
 // For CRUD operations on the DB.
 
-require_once('db_configs.php');
-
 class DB 
 {
     private static $GAME_TABLE_NAME = 'Visionary_Game';
@@ -11,9 +9,17 @@ class DB
 
     // Initializes the connection to the DB
     public static function initDbConnection() {
-        global $db_conn;
+        global $db_conn, $db_servername, $db_username, $db_password, $db_dbname;
+        
+        if (!file_exists(__DIR__ . '/db_configs.php')) {
+            echo "The file db_configs.php does not exist! Upload it in the same folder as db.php. ";
+            echo "It must define the DB connection values with: db_servername, db_username, db_password, db_dbname.";
+            die();
+        }
+        
+        require_once('db_configs.php');
 
-        $db_conn = new mysqli($servername, $username, $password, $dbname);
+        $db_conn = new mysqli($db_servername, $db_username, $db_password, $db_dbname);
         
         if ($db_conn->connect_error) {
             die("Connection failed: " . $db_conn->connect_error);
