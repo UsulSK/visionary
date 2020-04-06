@@ -1,3 +1,3 @@
 
 # DB configurations
-*.php
+db_configs.php
