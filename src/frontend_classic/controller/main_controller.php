@@ -61,6 +61,10 @@ try { // every Exception will be caught and displayed
     die;
 }
 
+
+// =========== functions ==========
+
+
 // Configure PHP to show as many errors as it can to help debugging
 function setPhpShowErrors() {
     ini_set('display_errors', 1);

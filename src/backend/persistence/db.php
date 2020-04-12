@@ -30,6 +30,11 @@ class DB
         } 
     }
 
+    // Deconstructor: Close SQL connection.
+    function __destruct() {
+        $this->db_conn->close();
+    }
+
     // Create a game.
     // Return: The ID of the created game
     public function createGame() {
@@ -51,26 +56,74 @@ class DB
         $this->db_conn->query($query);
 
         if ($this->db_conn->error) {
-            die("Insert failed: " . $this->db_conn->error);
+            die("Insert failed: " . $this->db_conn->error . '<br>Query: ' . $query );
         }
     }
 
-    // Create a user for a game.
+    // Get all users for a game.
+    // $gameId: The game for which the users should be retrieved.
+    // Returns: An array of users (entity: User).
     public function getUsersForGame($gameId) {
         $query = "SELECT * FROM " . self::$USER_TABLE_NAME . " WHERE GAME_ID = $gameId";
         
         $result = $this->db_conn->query($query);
 
         if ($this->db_conn->error) {
-            die("Insert failed: " . $this->db_conn->error);
+            die("Query failed: " . $this->db_conn->error . '<br>Query: ' . $query );
         }
 
         $users = array();
         while($userInDb = $result->fetch_assoc()) {
-            $users[] = $userInDb['NAME'];
+            $user = new User($userInDb['NAME']);
+            $users[] = $user;
         }
 
         return $users;
+    }
+
+    // Get alle Games where the time since creation is greater then the given time.
+    // $minutesSinceGameCreation: The time in minutes which should have passed since the game creation.
+    // Returns: An array of game IDs.
+    public function getGamesWhichAreOlderThenMinutes($minutesSinceGameCreation) {
+        $query = "SELECT * FROM " . self::$GAME_TABLE_NAME . " WHERE CREATION_TIME + INTERVAL $minutesSinceGameCreation MINUTE < NOW()";
+        
+        $result = $this->db_conn->query($query);
+
+        if ($this->db_conn->error) {
+            die("Query failed: " . $this->db_conn->error . '<br>Query: ' . $query );
+        }
+
+        $gameIds = array();
+        while($gameInDb = $result->fetch_assoc()) {
+            $gameIds[] = $gameInDb['ID'];
+        }
+
+        return $gameIds;
+    }
+
+    // Delete games from DB, with everything which belongs to them (for example: Users).
+    // $gameIds: Array of game ids, which should be deleted.
+    public function removeGames($gameIds) {
+
+        // delete all users which belong to these games
+
+        $query = "DELETE FROM " . self::$USER_TABLE_NAME . " WHERE GAME_ID IN (" . implode(',', $gameIds) . ")";
+        
+        $this->db_conn->query($query);
+
+        if ($this->db_conn->error) {
+            die("Query failed: " . $this->db_conn->error . '<br>Query: ' . $query );
+        }
+
+        // delete all games
+
+        $query = "DELETE FROM " . self::$GAME_TABLE_NAME . " WHERE ID IN (" . implode(',', $gameIds) . ")";
+        
+        $this->db_conn->query($query);
+
+        if ($this->db_conn->error) {
+            die("Query failed: " . $this->db_conn->error . '<br>Query: ' . $query );
+        }
     }
 }
 

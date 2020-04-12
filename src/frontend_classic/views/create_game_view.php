@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
    
    <head>
@@ -10,8 +11,8 @@
 
       <?php 
       
-      if(isset($error)) {
-         echo '<b>Error: ' . $error . '</b>';
+      if(isset($error_forview)) {
+         echo '<b>Error: ' . $error_forview . '</b>';
       }
       
       ?>

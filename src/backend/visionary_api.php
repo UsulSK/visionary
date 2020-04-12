@@ -1,10 +1,18 @@
 <?php
 
-// This is the Facade for visionary games. It provides the whole API.
-// So this is the Gateway to the game logic.
+/* 
+* This is the Facade for visionary games. It provides the whole API.
+* So this is the Gateway to the game logic.
+*/
+
 
 require_once('control/game.php');
 require_once('persistence/db.php');
+
+//  entities
+
+require_once('entities/user.php');
+
 
 class VisionaryFacade
 {
@@ -24,22 +32,33 @@ class VisionaryFacade
         $this->game = new Game($this->db);
     }
 
-    // Check if a user name is valid
+    // See: Game->isUserNameValid(...)
     public function isUserNameValid($userName) {
         return $this->game->isUserNameValid($userName);
     }
 
-    // Create a game with a user
-    // Return: The ID of the created game
+    // See: Game->createGameWithUser(...)
     public function createGameWithUser($userName, $userId) {
         return $this->game->createGameWithUser($userName, $userId);
     }
 
-    // Get all users for a game
+    // See: DB->getUsersForGame(...)
     public function getUsersForGame($gameId) {
         $users = $this->db->getUsersForGame($gameId);
 
         return $users;
+    }
+
+    // See: DB->getGamesWhichAreOlderThenMinutes(...)
+    public function getGamesWhichAreOlderThenMinutes($minutesSinceGameCreation) {
+        $gameIds = $this->db->getGamesWhichAreOlderThenMinutes($minutesSinceGameCreation);
+
+        return $gameIds;
+    }
+
+    // See: Game->getGamesWhichAreOlderThenMinutes(...)
+    public function removeGames($gameIds) {
+        $this->game->removeGames($gameIds);
     }
 }
 

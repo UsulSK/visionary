@@ -16,7 +16,9 @@ if( $action == 'create' ) {
       // create the game
       $gameId = $visionary->createGameWithUser($userName, session_id());
 
-      $shareLink = createShareLink($gameId);
+      $shareLink_forview = createShareLink($gameId);
+
+      $getLobbyDataLink_forview = "?controller=game_lobby&action=lobby_data&gameid=$gameId";
 
       $showView = 'game_lobby';
    }
@@ -24,7 +26,7 @@ if( $action == 'create' ) {
    // the username is invalid
 
    else {
-      $error = "Invalid username: " . $userNameCheckResult;
+      $error_forview = "Invalid username: " . $userNameCheckResult;
       
       $showView = 'create_game';
    }
@@ -48,8 +50,6 @@ function createShareLink($gameId) {
    }
    
    $shareLink = $protocoll . $_SERVER['SERVER_NAME'] . '/?controller=join_game&gameid=' . $gameId;
-
-   $shareLink = '<b>' . $shareLink . '</b>';
 
    return $shareLink;
 }

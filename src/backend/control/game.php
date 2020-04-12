@@ -55,6 +55,11 @@ class Game
 
         return $gameId;
     }
+
+    // See: DB->getGamesWhichAreOlderThenMinutes(...)
+    public function removeGames($gameIds) {
+        $this->db->removeGames($gameIds);
+    }
 }
 
 ?>
