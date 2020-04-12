@@ -1,0 +1,9 @@
+
+/* 
+    The CSS file for the whole site.
+    This ensures a common CI.
+*/
+
+body {
+    background-color: lightblue;
+  }

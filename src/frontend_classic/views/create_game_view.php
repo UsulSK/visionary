@@ -1,7 +1,7 @@
 <html>
    
    <head>
-      <title><?php echo $APP_TITLE;?></title>
+      <?php require('common_header.php'); ?>
    </head>
    
    <body>
@@ -18,10 +18,10 @@
 
       <form method="post">
          <label for="username">Chose a name to start a game:</label><br>
-         <input type="text" id="username" name="username"><br>
+         <input type="text" name="username"><br>
          <br>
-         <input type="hidden" id="action" name="action" value="create"><br>
-         <input type="hidden" id="controller" name="controller" value="creategame">
+         <input type="hidden" name="action" value="create"><br>
+         <input type="hidden" name="controller" value="create_game">
          <input type="submit" value="Go!">
       </form> 
 
