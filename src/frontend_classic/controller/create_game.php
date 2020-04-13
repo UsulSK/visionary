@@ -9,30 +9,39 @@ if( $action == 'create' ) {
    $userName = getAttributeValueFromHttpRequest("username");
    $userNameCheckResult = $visionary->isUserNameValid($userName);
 
-   // the username is valid
+   // the user name is valid
 
    if( $userNameCheckResult == "" ) {
+
+      // create the game
+
       $gameId = $visionary->createGameWithUser($userName, session_id());
 
-      $shareLink_forview = createShareLink($gameId);
+      // redirect browser to make a new request to show the game
 
-      $getLobbyDataLink_forview = "?controller=game_lobby&action=lobby_data&gameid=$gameId";
-
-      $showView = 'game_lobby';
+      $redirectionLink = createRedirectionLink($gameId);
+      header("Location: $redirectionLink");
+      die();
    }
 
-   // the username is invalid
+   // the user name is invalid
 
    else {
+
+      // show the create game view with the error message
+
       $error_forview = "Invalid username: " . $userNameCheckResult;
       
       $showView = 'create_game';
    }
 }
 
-// No action: Show the create game view
+// No action was given in HTTP request
 
 else {
+   
+   // show the create game view
+
    $showView = 'create_game';
 }
 
@@ -40,18 +49,16 @@ else {
 // =========== functions ==========
 
 
-// Create the HTTP-link to share the game for other users.
-function createShareLink($gameId) {
-   $protocoll = "http://";
-   if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
-      $protocoll = "https://";
-   }
-   
-   $shareLink = $protocoll . $_SERVER['SERVER_NAME'] . '/?controller=join_game&gameid=' . $gameId;
-
-   return $shareLink;
-}
-
-
+// Create the HTTP-link to which redirects to the game.
+function createRedirectionLink($gameId) {
+    $protocoll = "http://";
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+       $protocoll = "https://";
+    }
+    
+    $redirectionLink = $protocoll . $_SERVER['SERVER_NAME'] . '/?controller=show_game&gameid=' . $gameId;
+ 
+    return $redirectionLink;
+ }
 
 ?>

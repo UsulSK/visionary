@@ -15,6 +15,18 @@ function getAttributeValueFromHttpRequest($nameOfAttribute) {
     }
 
     return null;
-} 
+}
+
+// check if a user with an certain ID is already part of the game
+function isUserIdInGameUsers($userId, $gameInfo) {
+    $userIdsOfGame = $gameInfo->getUsers();
+    foreach ($userIdsOfGame as $userIdOfUserInGame) {
+        if( $userIdOfUserInGame->getId() == $userId ) {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 ?>
