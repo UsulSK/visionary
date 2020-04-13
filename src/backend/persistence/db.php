@@ -38,32 +38,56 @@ class DB
     // Create a game.
     // Return: The ID of the created game
     public function createGame() {
-        $query = "INSERT INTO " . self::$GAME_TABLE_NAME . " VALUES ()";
+        $query = "INSERT INTO " . self::$GAME_TABLE_NAME . " (STATE) VALUES (\"" . GameState::$CREATED . "\")";
         
         $this->db_conn->query($query);
 
         if ($this->db_conn->error) {
-            die("Insert failed: " . $this->db_conn->error);
+            die("Insert of game failed: " . $this->db_conn->error . '<br>Query: ' . $query);
         }
         
         return $this->db_conn->insert_id;
     }
 
     // Create a user for a game.
-    public function createUserForGame($userName, $userId, $gameId) {
-        $query = "INSERT INTO " . self::$USER_TABLE_NAME . " (NAME, ID, GAME_ID) VALUES ('$userName', '$userId', $gameId)";
+    public function createUserForGame($userName, $userId, $gameId, $position) {
+        $query = "INSERT INTO " . self::$USER_TABLE_NAME . " (NAME, ID, GAME_ID, POSITION) VALUES ('$userName', '$userId', $gameId, $position)";
         
         $this->db_conn->query($query);
 
         if ($this->db_conn->error) {
-            die("Insert failed: " . $this->db_conn->error . '<br>Query: ' . $query );
+            die("Insert of user failed: " . $this->db_conn->error . '<br>Query: ' . $query );
         }
+    }
+
+    // Get all infos for a game.
+    // $gameId: The game for which the infos should be retrieved.
+    // Returns: The infos about the game (entity: GameInfo).
+    public function getGameInfos($gameId) {
+        $query = "SELECT * FROM " . self::$GAME_TABLE_NAME . " WHERE ID = $gameId";
+        
+        $result = $this->db_conn->query($query);
+
+        if ($this->db_conn->error) {
+            die("Query failed: " . $this->db_conn->error . '<br>Query: ' . $query );
+        }
+        $gameInDb = $result->fetch_assoc();
+
+        if( is_null($gameInDb) ) { // no game found
+            return null;
+        }
+
+        $users = $this->getUsersForGame($gameId);
+
+        $gameInfo = new GameInfo($users, $gameInDb['STATE']);
+
+        return $gameInfo;
     }
 
     // Get all users for a game.
     // $gameId: The game for which the users should be retrieved.
     // Returns: An array of users (entity: User).
-    public function getUsersForGame($gameId) {
+    private function getUsersForGame($gameId) {
         $query = "SELECT * FROM " . self::$USER_TABLE_NAME . " WHERE GAME_ID = $gameId";
         
         $result = $this->db_conn->query($query);
@@ -74,7 +98,7 @@ class DB
 
         $users = array();
         while($userInDb = $result->fetch_assoc()) {
-            $user = new User($userInDb['NAME']);
+            $user = new User($userInDb['NAME'], $userInDb['ID'], $userInDb['POSITION']);
             $users[] = $user;
         }
 

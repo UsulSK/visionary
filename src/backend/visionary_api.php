@@ -12,6 +12,8 @@ require_once('persistence/db.php');
 //  entities
 
 require_once('entities/user.php');
+require_once('entities/game_info.php');
+require_once('entities/game_state.php');
 
 
 class VisionaryFacade
@@ -42,11 +44,11 @@ class VisionaryFacade
         return $this->game->createGameWithUser($userName, $userId);
     }
 
-    // See: DB->getUsersForGame(...)
-    public function getUsersForGame($gameId) {
-        $users = $this->db->getUsersForGame($gameId);
+    // See: Game->getGameInfos(...)
+    public function getGameInfos($gameId) {
+        $gameInfos = $this->game->getGameInfos($gameId);
 
-        return $users;
+        return $gameInfos;
     }
 
     // See: DB->getGamesWhichAreOlderThenMinutes(...)

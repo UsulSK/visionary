@@ -20,10 +20,9 @@ if( $action == 'lobby_data' ) {
 // $gameId: The game ID for which the lobby data should be returned.
 // $visionary: The game logic (=backend).
 function returnLobbyDataAsJson($gameId, $visionary) {
-    $users = $visionary->getUsersForGame($gameId);
+    $gameInfo = $visionary->getGameInfos($gameId);
 
-    $lobbyData = (object) ['users' => $users];
-    $lobbyDataJson = json_encode($lobbyData);
+    $lobbyDataJson = json_encode($gameInfo);
 
     header('Content-Type: application/json'); // set header of HTTP response to JSON
 

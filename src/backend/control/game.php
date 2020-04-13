@@ -39,9 +39,19 @@ class Game
         return "";
     }
 
+    // See: DB->getGameInfos(...)
+    public function getGameInfos($gameId) {
+        return $this->db->getGameInfos($gameId);
+    }
+
     // Create a game with a user
     // Return: The ID of the created game
     public function createGameWithUser($userName, $userId) {
+
+        if( !isset($userId) || (strlen($userId) == 0) ) {
+            throw new Exception("The user ID must not be empty!");
+        }
+
         $userNameCheckResult = $this->isUserNameValid($userName);
         if( $userNameCheckResult != "" ) {
             throw new Exception("Invalid username: $userNameCheckResult");
@@ -51,7 +61,7 @@ class Game
 
         $gameId = $this->db->createGame();
 
-        $this->db->createUserForGame($trimmedUserName, $userId, $gameId);
+        $this->db->createUserForGame($trimmedUserName, $userId, $gameId, 1);
 
         return $gameId;
     }

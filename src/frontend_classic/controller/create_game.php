@@ -12,8 +12,6 @@ if( $action == 'create' ) {
    // the username is valid
 
    if( $userNameCheckResult == "" ) {
-
-      // create the game
       $gameId = $visionary->createGameWithUser($userName, session_id());
 
       $shareLink_forview = createShareLink($gameId);
