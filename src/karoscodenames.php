@@ -8,13 +8,30 @@
 		}
 		td {
 		  border: 1px solid black;
-		  width: 130px;
+		  width: 160px;
 		  height: 50px;
 		  padding: 15px;
 		  text-align: center;
 		}
 	</style>
   </head>
+  
+  <script>
+	function changeWord2(wordId) {
+	  oldColor = document.getElementById(wordId).style.color;
+
+	  if( oldColor=='black') {
+		document.getElementById(wordId).style.color = 'red';
+	  } else if( oldColor=='red') {
+		document.getElementById(wordId).style.color = 'blue';
+	  } else if( oldColor=='blue') {
+		document.getElementById(wordId).style.color = '#F3F2EE';
+	  } else  {
+		document.getElementById(wordId).style.color = 'black';
+	  }
+	}
+	</script>
+
   <body>
     <!-- page content -->
 	<table>
@@ -80,10 +97,10 @@
 			<?php
 				for ($i = 0; $i < 5; $i++) {
 					echo '<td>';
+					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
-					<input type="checkbox">
+					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
-					echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					echo '</td>';
 					}
 			?>
@@ -92,10 +109,10 @@
 			<?php
 				for ($i = 5; $i < 10; $i++) {
 					echo '<td>';
+					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
-					<input type="checkbox">
+					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
-					echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					echo '</td>';
 					}
 			?>
@@ -104,10 +121,10 @@
 			<?php
 				for ($i = 10; $i < 15; $i++) {
 					echo '<td>';
+					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
-					<input type="checkbox">
+					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
-					echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					echo '</td>';
 					}
 			?>
@@ -116,10 +133,10 @@
 			<?php
 				for ($i = 15; $i < 20; $i++) {
 					echo '<td>';
+					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
-					<input type="checkbox">
+					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
-					echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					echo '</td>';
 					}
 			?>
@@ -128,10 +145,10 @@
 			<?php
 				for ($i = 20; $i < 25; $i++) {
 					echo '<td>';
+					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
-					<input type="checkbox">
+					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
-					echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					echo '</td>';
 					}
 			?>
@@ -141,7 +158,8 @@
 		  ?>
 		</table>
 		<!--  		 -->
-		
+		<p> By clicking on a word you can change its font color from black to <span style="color: red">red</span> to <span style="color: blue">blue</span> to <span style="color: #F3F2EE">grey</span> and back to black. This might help you to remember which words have already been guessed. </p>
+		<p> Be careful: all color coding will be gone if you reload the page.</p>
 		<?php
 			}
 		
@@ -314,6 +332,10 @@
 				else {
 					echo 'Oops, something went wrong.';
 				}
+		?>
+		<p> Be careful: all checkboxes will be unchecked if you reload the page.</p>
+	
+		<?php
 		}
 		}
 	?> 
