@@ -6,6 +6,8 @@
 
 table.codenames_words {
   border: 1px solid black;
+  margin-left: 30px;
+  margin-top: 30px;
 }
 
 td.codenames_words {
@@ -14,4 +16,21 @@ td.codenames_words {
   height: 50px;
   padding: 15px;
   text-align: center;
+}
+
+.wordtype_0 {
+  color: grey;
+}
+
+.wordtype_1 {
+  color: red;
+}
+
+.wordtype_2 {
+  color: blue;
+}
+
+.wordtype_X {
+  color: black;
+  font-weight: bold;
 }
