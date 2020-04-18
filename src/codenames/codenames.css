@@ -1,0 +1,17 @@
+
+/* 
+    The CSS file for Codenames.
+*/
+
+
+table.codenames_words {
+  border: 1px solid black;
+}
+
+td.codenames_words {
+  border: 1px solid black;
+  width: 160px;
+  height: 50px;
+  padding: 15px;
+  text-align: center;
+}
