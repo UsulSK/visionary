@@ -1,10 +1,25 @@
-<?php
+<!DOCTYPE html>
+<html>
+   
+   <head>
+      <title>20-4-7 games</title>
+      <link rel="stylesheet" type="text/css" href="/common/global.css">
+   </head>
+   
+   <body>
+       
+    <img id="twentyforseven" src="/startview/20-4-7.png" alt="20-4-7 games">
+    
+    <h1>Choose your poison!</h1>
 
-/*
-* This just "starts" the main controller.
-* Reason: All the frontend code should be in one folder and not in the root folder (to have a clear structure).
-*/
 
-require_once('frontend_classic/controller/main_controller.php'); 
+    <br>
+    <br>
+    <a href="/codenames/codenames.php">How about a nice game of Codenames?</a> 
+    <br>
+    <br>
+    <a href="/visionary/frontend_classic/controller/visionary.php">How about a exciting game of Visionary?</a> 
 
-?>
+   </body>
+
+</html>
