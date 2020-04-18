@@ -9,13 +9,13 @@
       
       <h1>Create your game!</h1>
 
-      <?php 
+<?php 
       
       if(isset($error_forview)) {
          echo '<b>Error: ' . $error_forview . '</b>';
       }
       
-      ?>
+?>
 
       <form method="post">
          <label for="username">Chose a name to start a game:</label><br>

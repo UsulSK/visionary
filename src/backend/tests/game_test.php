@@ -79,6 +79,7 @@ class CreateGameTest
         testAssertEquals($user->getName(), $userName, "The users name should be \"$userName\".");
         testAssertEquals($user->getId(), $userId, "The users ID should be \"$userId\".");
         testAssertEquals($user->getPosition(), "1", "The users position should be 1.");
+        testAssertEquals($user->isReady(), false, "The users should not be ready.");
         
         testAssertEquals($gameInfo->getState(), GameState::$CREATED, "The game state should be \"" . GameState::$CREATED . "\".");
 

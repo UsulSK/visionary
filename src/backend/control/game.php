@@ -44,10 +44,27 @@ class Game
         return $this->db->getGameInfos($gameId);
     }
 
+
+    // Add a new user to a game.
+    public function createUserForGame($userName, $userId, $gameId) {
+        if( !isset($userId) || (strlen($userId) == 0) ) {
+            throw new Exception("The user ID must not be empty!");
+        }
+
+        $userNameCheckResult = $this->isUserNameValid($userName);
+        if( $userNameCheckResult != "" ) {
+            throw new Exception("Invalid username: $userNameCheckResult");
+        }
+
+        // TODO: CHECK if game exists
+        // TODO: CHECK if user exists in game
+        // TODO: Calculate position
+        // create user
+    }
+
     // Create a game with a user
     // Return: The ID of the created game
     public function createGameWithUser($userName, $userId) {
-
         if( !isset($userId) || (strlen($userId) == 0) ) {
             throw new Exception("The user ID must not be empty!");
         }

@@ -39,6 +39,11 @@ class VisionaryFacade
         return $this->game->isUserNameValid($userName);
     }
 
+    // See: Game->createUserForGame(...)
+    public function createUserForGame($userName, $userId, $gameId) {
+        $this->game->createUserForGame($userName, $userId, $gameId);
+    }
+
     // See: Game->createGameWithUser(...)
     public function createGameWithUser($userName, $userId) {
         return $this->game->createGameWithUser($userName, $userId);

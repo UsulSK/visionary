@@ -51,7 +51,7 @@ class DB
 
     // Create a user for a game.
     public function createUserForGame($userName, $userId, $gameId, $position) {
-        $query = "INSERT INTO " . self::$USER_TABLE_NAME . " (NAME, ID, GAME_ID, POSITION) VALUES ('$userName', '$userId', $gameId, $position)";
+        $query = "INSERT INTO " . self::$USER_TABLE_NAME . " (NAME, ID, GAME_ID, POSITION, READY) VALUES ('$userName', '$userId', $gameId, $position, FALSE)";
         
         $this->db_conn->query($query);
 
@@ -98,7 +98,7 @@ class DB
 
         $users = array();
         while($userInDb = $result->fetch_assoc()) {
-            $user = new User($userInDb['NAME'], $userInDb['ID'], $userInDb['POSITION']);
+            $user = new User($userInDb['NAME'], $userInDb['ID'], $userInDb['POSITION'], $userInDb['READY']);
             $users[] = $user;
         }
 

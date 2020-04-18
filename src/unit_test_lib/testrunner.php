@@ -136,7 +136,8 @@ function testAssertEquals($valueToCheck, $expectedValue, $message) {
     }
 
     $valueToCheckString = convertValueToString($valueToCheck);
-    $errorMessage = "Check failed while checking \"$message\"! <br>Expected value \"$expectedValue\", got value \"$valueToCheckString\"!";
+    $expectedValueString = convertValueToString($expectedValue);
+    $errorMessage = "Check failed while checking \"$message\"! <br>Expected value \"$expectedValueString\", got value \"$valueToCheckString\"!";
     echo "<p>$errorMessage</p>";
 
     throw new Exception($errorMessage);
