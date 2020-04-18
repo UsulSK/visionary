@@ -23,7 +23,6 @@
 	</script>
 
   <body>
-    <!-- page content -->
 	<table class="codenames_words">
 	  <?php
 	
@@ -32,14 +31,8 @@
 	$startTeam = rand(1,2);
 	
 	if (!isset($_GET["code"]) && !isset($_GET["names"])) {
-		//$startTeam = rand(1,2)
 		$code = '00000001111111122222222X' . $startTeam;
 		$code = str_shuffle($code);
-		
-		//$code = substr($code, 0, 5) . '_' . substr($code, 5, 5) . '_' . substr($code, 10, 5) . '_' . substr($code, 15, 5) . '_' . substr($code, 20, 5);
-		
-		//echo 'Please copy the following link, open it and share it with the other team captain.';
-		//echo $_SERVER['SERVER_NAME'] . '/codenames.php?code=' . $code;
 		
 		$numbers = range(0, $anzahlBegriffe-1);
 		shuffle($numbers);
@@ -47,11 +40,7 @@
 		$names = $numbers[0];
 		for ($i = 1; $i < 25; $i++) {
 			$names = $names . '_' . $numbers[$i];
-		}
-		
-		// echo $_SERVER['SERVER_NAME'] . '/karoscodenames.php?names=' . $names;
-		// echo $_SERVER['SERVER_NAME'] . '/karoscodenames.php?names=' . $names . '&code=' . $code;
-		
+		}		
 		
 		echo 'Please copy the following link and share it with the other team members:<br><br>';
 		?>
@@ -71,23 +60,12 @@
 		$begriffe = explode("_", $_GET["names"]);
 			
 		if (!isset($_GET["code"]) && isset($_GET["names"])){
-				
-			//$bluecounter = 0;
-			//$redcounter = 0;
-			
-			//echo $bluecounter;
-			//echo $redcounter;
-			
-			//$zeilen = explode("_", $_GET["code"]);
-			//$zeilen = str_split($_GET["code"]);
-			//$begriffe = explode("_", $_GET["names"]);
-			
+
 			?>
 			<tr>
 			<?php
 				for ($i = 0; $i < 5; $i++) {
 					echo '<td>';
-					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
 					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
@@ -99,7 +77,6 @@
 			<?php
 				for ($i = 5; $i < 10; $i++) {
 					echo '<td>';
-					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
 					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
@@ -111,7 +88,6 @@
 			<?php
 				for ($i = 10; $i < 15; $i++) {
 					echo '<td>';
-					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
 					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
@@ -123,7 +99,6 @@
 			<?php
 				for ($i = 15; $i < 20; $i++) {
 					echo '<td>';
-					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
 					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
@@ -135,7 +110,6 @@
 			<?php
 				for ($i = 20; $i < 25; $i++) {
 					echo '<td>';
-					//echo '<br>' . $alleBegriffe[$begriffe[$i]];
 					?>
 					<div id="<?php echo $begriffe[$i] ?>" onclick="changeWord2('<?php echo $begriffe[$i] ?>')" style="color:black; -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;"><?php echo $alleBegriffe[$begriffe[$i]] ?></div>
 					<?php
@@ -147,7 +121,7 @@
 			echo '<br>';
 		  ?>
 		</table>
-		<!--  		 -->
+
 		<p> By clicking on a word you can change its font color from black to <span style="color: red">red</span> to <span style="color: blue">blue</span> to <span style="color: #F3F2EE">grey</span> and back to black. This might help you to remember which words have already been guessed. </p>
 		<p> Be careful: all color coding will be gone if you reload the page.</p>
 		<?php
@@ -155,15 +129,7 @@
 		
 		if (isset($_GET["code"]) && isset($_GET["names"])){
 				
-			//$bluecounter = 0;
-			//$redcounter = 0;
-			
-			//echo $bluecounter;
-			//echo $redcounter;
-			
-			//$zeilen = explode("_", $_GET["code"]);
 			$zeilen = str_split($_GET["code"]);
-			//$begriffe = explode("_", $_GET["names"]);
 			
 			?>
 			<tr>
@@ -179,11 +145,9 @@
 					}
 					else if ($zeilen[$i] == '1'){
 						echo '<font color="red">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$redcounter = $redcounter + 1;
 					}
 					else if ($zeilen[$i] == '2'){
 						echo '<font color="blue">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$bluecounter++;
 					}
 					else if ($zeilen[$i] == 'X'){
 						echo '<b>' . $alleBegriffe[$begriffe[$i]] . '</b>';
@@ -205,11 +169,9 @@
 					}
 					else if ($zeilen[$i] == '1'){
 						echo '<font color="red">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$redcounter = $redcounter + 1;
 					}
 					else if ($zeilen[$i] == '2'){
 						echo '<font color="blue">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$bluecounter++;
 					}
 					else if ($zeilen[$i] == 'X'){
 						echo '<b>' . $alleBegriffe[$begriffe[$i]] . '</b>';
@@ -231,11 +193,9 @@
 					}
 					else if ($zeilen[$i] == '1'){
 						echo '<font color="red">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$redcounter = $redcounter + 1;
 					}
 					else if ($zeilen[$i] == '2'){
 						echo '<font color="blue">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$bluecounter++;
 					}
 					else if ($zeilen[$i] == 'X'){
 						echo '<b>' . $alleBegriffe[$begriffe[$i]] . '</b>';
@@ -257,11 +217,9 @@
 					}
 					else if ($zeilen[$i] == '1'){
 						echo '<font color="red">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$redcounter = $redcounter + 1;
 					}
 					else if ($zeilen[$i] == '2'){
 						echo '<font color="blue">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$bluecounter++;
 					}
 					else if ($zeilen[$i] == 'X'){
 						echo '<b>' . $alleBegriffe[$begriffe[$i]] . '</b>';
@@ -283,11 +241,9 @@
 					}
 					else if ($zeilen[$i] == '1'){
 						echo '<font color="red">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$redcounter = $redcounter + 1;
 					}
 					else if ($zeilen[$i] == '2'){
 						echo '<font color="blue">' . $alleBegriffe[$begriffe[$i]] . '</font>';
-						//$bluecounter++;
 					}
 					else if ($zeilen[$i] == 'X'){
 						echo '<b>' . $alleBegriffe[$begriffe[$i]] . '</b>';
@@ -300,18 +256,8 @@
 			echo '<br>';
 		  ?>
 		</table>
-		<!--  		 -->
 		
 		<?php
-				// if ($redcounter > $bluecounter) {
-					// echo '<font color="red">Red begins</font>';
-				// }
-				// else if ($redcounter < $bluecounter) {
-					// echo '<font color="blue">Blue begins</font>';
-				// }
-				// else {
-					// echo 'Oops, wrong code!';
-				// }
 				echo '<br><br>';
 				if ($startTeam=1) {
 					echo '<font color="red">Red begins</font>';
