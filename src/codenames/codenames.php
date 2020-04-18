@@ -40,18 +40,18 @@
 		$names = $numbers[0];
 		for ($i = 1; $i < 25; $i++) {
 			$names = $names . '_' . $numbers[$i];
-		}		
+		}
 		
 		echo 'Please copy the following link and share it with the other team members:<br><br>';
 		?>
 		
-		<a href="<?php echo '/karoscodenames.php?names=' . $names ?>">Link for team members</a>
+		<a href="<?php echo '/codenames/codenames.php?names=' . $names ?>">Link for team members</a>
 		
 		<?php
 		echo '<br><br><br>Please copy the following link, open it and share it with the other team captain:<br><br>';
 		?>
 		
-		<a href="<?php echo '/karoscodenames.php?names=' . $names . '&code=' . $code ?>">Link for team captains</a>
+		<a href="<?php echo '/codenames/codenames.php?names=' . $names . '&code=' . $code ?>">Link for team captains</a>
 		
 		<?php
 	}
