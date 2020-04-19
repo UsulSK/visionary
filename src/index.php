@@ -18,7 +18,10 @@
     <a href="/codenames/codenames.php">How about a nice game of Codenames?</a> 
     <br>
     <br>
-    <a href="/visionary/frontend_classic/controller/visionary.php">How about a exciting game of Visionary?</a> 
+    <a href="/visionary/frontend_classic/controller/visionary.php">How about an exciting game of Visionary?</a> 
+    <br>
+    <br>
+    <a href="/insider/frontend_classic/controller/insider.php">How about a nice game of Insider?</a> 
 
    </body>
 

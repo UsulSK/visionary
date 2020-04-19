@@ -4,6 +4,13 @@
 * Here global helper functions are defined which can then be used everywhere.
 */
 
+// Configure PHP to show as many errors as it can to help debugging
+function setPhpShowErrors() {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+}
+
 //  Gets the value of an attribute from a HTTP request, no matter if it was a GET or POST request.
 //  Returns 'null' if the value was not sent in the HTTP request.
 function getAttributeValueFromHttpRequest($nameOfAttribute) {
